@@ -1,10 +1,8 @@
 import 'package:agora_chat/extensions/context_extensions.dart';
-import 'package:agora_chat/recent_chats/view/recent_chats_view.dart';
+import 'package:agora_chat/all_conversations/view/all_conversation_view.dart';
 import 'package:agora_chat/authentication/view_model/auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../messaging/view/messaging_view.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -53,7 +51,8 @@ class LoginScreenState extends State<LoginScreen> {
                         final success =
                             await vm.login(_usernameController.text.trim());
                         if (success && mounted) {
-                          context.pushMaterialRoute(const MessagingView());
+                          context
+                              .pushMaterialRoute(const AllConversationsView());
                           _showMessage("Logged in successfully");
                         } else {
                           _showMessage("something went wrong");
