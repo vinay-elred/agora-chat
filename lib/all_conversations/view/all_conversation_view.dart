@@ -71,9 +71,9 @@ class _AllConversationsViewState extends State<AllConversationsView> {
           builder: (context, isLoading, child) => isLoading
               ? const Center(child: CircularProgressIndicator())
               : ListView.builder(
-                  itemCount: _conv.length,
+                  itemCount: vm.conversations.length,
                   itemBuilder: (context, index) {
-                    ConversationModel conversation = _conv[index];
+                    ConversationModel conversation = vm.conversations[index];
                     return InkWell(
                       onTap: () => context.pushMaterialRoute(
                         MessagingView(recipientUserId: conversation.username),

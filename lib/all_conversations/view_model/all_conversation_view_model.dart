@@ -23,12 +23,13 @@ class AllConversationViewModel extends ChangeNotifier {
   void fetchConversations() async {
     isLoading = true;
     try {
-      List<ChatConversation> agoraConv =
-          await ChatClient.getInstance.chatManager.loadAllConversations();
+      final agoraConv =
+          await ChatClient.getInstance.chatManager.fetchConversation();
 
-      for (var conv in agoraConv) {
+      for (var conv in agoraConv.data) {
         final unreadCount = await conv.unreadCount();
         final lastMessage = await conv.latestMessage();
+
         final conversation = ConversationModel(
           username: lastMessage!.from!,
           userDp: '',
