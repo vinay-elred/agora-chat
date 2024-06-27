@@ -11,12 +11,21 @@ class AuthViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  String? _currentUserId = ChatClient.getInstance.currentUserId;
+  String? get geCurrentUserId => _currentUserId;
+  set currentUserId(String? newValue) {
+    _currentUserId = newValue;
+    notifyListeners();
+  }
+
   Future<bool> login(String username) async {
     if (username.isEmpty) return false;
 
     isLoading = true;
     try {
       await ChatClient.getInstance.login(username, '12345', true);
+
+      currentUserId = ChatClient.getInstance.currentUserId;
       return true;
     } catch (error) {
       return false;

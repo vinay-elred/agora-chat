@@ -10,6 +10,7 @@ dependencies:
   agora_chat_sdk: ^1.2.0
   flutter:
     sdk: flutter
+  intl: ^0.18.1
   provider: ^6.1.2
 
 dev_dependencies:
