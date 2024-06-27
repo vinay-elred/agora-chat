@@ -1,6 +1,6 @@
-import 'package:agora_chat/sourav_modules/authentication/const/agora_chat_config.dart';
-import 'package:agora_chat/sourav_modules/authentication/view_model/auth_view_model.dart';
-import 'package:agora_chat_sdk/agora_chat_sdk.dart';
+import 'package:agora_chat/extensions/context_extensions.dart';
+import 'package:agora_chat/recent_chats/view/recent_chats_view.dart';
+import 'package:agora_chat/authentication/view_model/auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,16 +13,6 @@ class LoginScreen extends StatefulWidget {
 
 class LoginScreenState extends State<LoginScreen> {
   final TextEditingController _usernameController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    try {
-      context.read<AuthViewModel>().initializeAgoraChat();
-    } catch (e) {
-      _showMessage(e.toString());
-    }
-  }
 
   @override
   void dispose() {
@@ -60,7 +50,8 @@ class LoginScreenState extends State<LoginScreen> {
                       onPressed: () async {
                         final success =
                             await vm.login(_usernameController.text.trim());
-                        if (success) {
+                        if (success && mounted) {
+                          context.pushMaterialRoute(const RecentChatsView());
                           _showMessage("Logged in successfully");
                         } else {
                           _showMessage("something went wrong");

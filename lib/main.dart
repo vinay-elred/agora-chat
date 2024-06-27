@@ -1,13 +1,13 @@
-import 'package:agora_chat/sourav_modules/authentication/ui/login_screen.dart';
-import 'package:agora_chat/sourav_modules/authentication/view_model/auth_view_model.dart';
+import 'package:agora_chat/authentication/ui/login_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
+import 'authentication/view_model/auth_view_model.dart';
 import 'core/chat_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await ChatService.initAgoraChat();
+  await ChatService.initAgoraChat();
   runApp(const MainApp());
 }
 
