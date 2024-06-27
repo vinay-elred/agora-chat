@@ -1,3 +1,6 @@
+import 'package:agora_chat/sourav_modules/authentication/ui/login_screen.dart';
+import 'package:agora_chat/sourav_modules/authentication/view_model/auth_view_model.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,11 +12,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+    return ChangeNotifierProvider<AuthViewModel>(
+      create: (context) => AuthViewModel(),
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(body: LoginScreen()),
       ),
     );
   }
