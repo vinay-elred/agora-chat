@@ -7,17 +7,21 @@ class RecentChatsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Chats'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              context.read<AuthViewModel>().signOut();
-            },
-            icon: const Icon(Icons.logout),
-          ),
-        ],
+    return WillPopScope(
+      onWillPop: () => Future.value(false),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Chats'),
+          automaticallyImplyLeading: false,
+          actions: [
+            IconButton(
+              onPressed: () {
+                context.read<AuthViewModel>().signOut();
+              },
+              icon: const Icon(Icons.logout),
+            ),
+          ],
+        ),
       ),
     );
   }
