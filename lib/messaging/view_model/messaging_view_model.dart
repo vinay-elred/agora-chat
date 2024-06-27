@@ -51,9 +51,9 @@ class MessagingViewModel extends ChangeNotifier {
     );
   }
 
-  void _onMessagesReceived(List<ChatMessage> messages) {
-    for (var msg in messages) {
-      messages = [...messages, msg];
+  void _onMessagesReceived(List<ChatMessage> incomingMessages) {
+    for (var msg in incomingMessages) {
+      _messages = [...messages, msg];
       log(
         "receive message: ${msg.body.type}, from: ${msg.from}",
       );

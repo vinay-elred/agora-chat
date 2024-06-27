@@ -10,4 +10,12 @@ extension ContextExt on BuildContext {
       MaterialPageRoute(builder: (_) => screen),
     );
   }
+
+  Future<dynamic> pushUntilRoute(Widget screen) async {
+    return await Navigator.pushAndRemoveUntil(
+      this,
+      MaterialPageRoute(builder: (_) => screen),
+      (route) => false,
+    );
+  }
 }

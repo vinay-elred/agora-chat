@@ -57,7 +57,7 @@ class _AllConversationsViewState extends State<AllConversationsView> {
                 final success = await context.read<AuthViewModel>().signOut();
 
                 if (success) {
-                  context.pushMaterialRoute(const LoginScreen());
+                  context.pushUntilRoute(const LoginScreen());
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text('Logged out successfully!')));
                 }

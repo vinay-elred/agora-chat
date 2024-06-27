@@ -45,6 +45,7 @@ class _MessagingFieldState extends State<MessagingField> {
                 ? () {
                     final msg = textController.text.trim();
                     context.read<MessagingViewModel>().sendMessage(msg);
+                    textController.clear();
                   }
                 : null,
             icon: const Icon(Icons.send),
