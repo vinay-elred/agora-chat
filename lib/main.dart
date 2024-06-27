@@ -1,6 +1,11 @@
+import 'package:agora_chat/messaging/view/messaging_view.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+import 'core/chat_service.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // await ChatService.initAgoraChat();
   runApp(const MainApp());
 }
 
@@ -10,11 +15,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+      home: MessagingView(),
     );
   }
 }
