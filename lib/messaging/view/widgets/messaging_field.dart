@@ -1,4 +1,6 @@
+import 'package:agora_chat/messaging/view_model/messaging_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MessagingField extends StatefulWidget {
   const MessagingField({super.key});
@@ -39,11 +41,13 @@ class _MessagingFieldState extends State<MessagingField> {
           hintText: "Message here...",
           contentPadding: const EdgeInsets.all(15),
           suffixIcon: IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.send,
-              color: enableSend ? Colors.blue : Colors.grey,
-            ),
+            onPressed: enableSend
+                ? () {
+                    final msg = textController.text.trim();
+                    context.read<MessagingViewModel>().sendMessage(msg);
+                  }
+                : null,
+            icon: const Icon(Icons.send),
           ),
         ),
       ),

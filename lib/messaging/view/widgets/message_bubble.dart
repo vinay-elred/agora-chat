@@ -1,8 +1,14 @@
+import 'package:agora_chat_sdk/agora_chat_sdk.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+import '../message_type/message_type_widget.dart';
 
 class MessageBubble extends StatelessWidget {
-  const MessageBubble({super.key, required this.isSender});
+  const MessageBubble(
+      {super.key, required this.isSender, required this.message});
   final bool isSender;
+  final ChatMessage message;
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +35,8 @@ class MessageBubble extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const Text("Messageing data"),
-              const Text("timestamp"),
+              MessageTypeWidget(message: message),
+              Text(formatTimestamp),
               const SizedBox(height: 2),
               buildReceipts(),
             ],
@@ -40,11 +46,21 @@ class MessageBubble extends StatelessWidget {
     );
   }
 
+  String get formatTimestamp {
+    return DateFormat('hh:mm a').format(
+      DateTime.fromMillisecondsSinceEpoch(message.serverTime),
+    );
+  }
+
   Widget buildReceipts() {
     if (!isSender) return const SizedBox.shrink();
     IconData icon = Icons.watch_later_rounded;
-    if (true) icon = Icons.done;
-    if (true) icon = Icons.done_all;
-    return Icon(icon, size: 15);
+    if (message.status == MessageStatus.SUCCESS) icon = Icons.done;
+    if (message.hasDeliverAck) icon = Icons.done_all;
+    return Icon(
+      icon,
+      size: 15,
+      color: message.hasReadAck ? Colors.blue : null,
+    );
   }
 }
