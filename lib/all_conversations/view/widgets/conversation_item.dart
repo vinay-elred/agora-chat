@@ -1,9 +1,9 @@
-import 'package:agora_chat/all_conversations/models/conversation.dart';
+import 'package:agora_chat/all_conversations/models/conversation_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ConversationItem extends StatelessWidget {
-  final Conversation conversation;
+  final ConversationModel conversation;
 
   const ConversationItem({Key? key, required this.conversation})
       : super(key: key);

@@ -3,7 +3,8 @@ import 'package:agora_chat/all_conversations/view_model/all_conversation_view_mo
 import 'package:agora_chat/authentication/view/login_screen.dart';
 import 'package:agora_chat/authentication/view_model/auth_view_model.dart';
 import 'package:agora_chat/extensions/context_extensions.dart';
-import 'package:agora_chat/all_conversations/models/conversation.dart';
+import 'package:agora_chat/all_conversations/models/conversation_model.dart';
+import 'package:agora_chat/messaging/view/messaging_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -25,7 +26,7 @@ class _AllConversationsViewState extends State<AllConversationsView> {
   }
 
   final _conv = [
-    Conversation(
+    ConversationModel(
       username: 'sourav',
       userDp:
           'https://gravatar.com/avatar/27205e5c51cb03f862138b22bcb5dc20f94a342e744ff6df1b8dc8af3c865109',
@@ -33,7 +34,7 @@ class _AllConversationsViewState extends State<AllConversationsView> {
       lastMessage: 'This is last message',
       lastMessageTime: DateTime.now().millisecondsSinceEpoch.toString(),
     ),
-    Conversation(
+    ConversationModel(
       username: 'vinay',
       userDp:
           'https://gravatar.com/avatar/27205e5c51cb03f862138b22bcb5dc20f94a342e744ff6df1b8dc8af3c865109',
@@ -49,6 +50,7 @@ class _AllConversationsViewState extends State<AllConversationsView> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Recent Chats'),
+          automaticallyImplyLeading: false,
           actions: [
             IconButton(
               onPressed: () async {
@@ -71,9 +73,13 @@ class _AllConversationsViewState extends State<AllConversationsView> {
               : ListView.builder(
                   itemCount: _conv.length,
                   itemBuilder: (context, index) {
-                    Conversation conversation = _conv[index];
+                    ConversationModel conversation = _conv[index];
                     return InkWell(
-                        child: ConversationItem(conversation: conversation));
+                      onTap: () => context.pushMaterialRoute(
+                        MessagingView(recipientUserId: conversation.username),
+                      ),
+                      child: ConversationItem(conversation: conversation),
+                    );
                   },
                 ),
         ));

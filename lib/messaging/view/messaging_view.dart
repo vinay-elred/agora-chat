@@ -7,12 +7,13 @@ import 'widgets/message_bubble.dart';
 import 'widgets/messaging_field.dart';
 
 class MessagingView extends StatelessWidget {
-  const MessagingView({super.key});
+  const MessagingView({super.key, required this.recipientUserId});
+  final String recipientUserId;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => MessagingViewModel('vinay'),
+      create: (context) => MessagingViewModel(recipientUserId),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Messaging'),

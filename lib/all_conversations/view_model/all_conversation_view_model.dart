@@ -1,4 +1,4 @@
-import 'package:agora_chat/all_conversations/models/conversation.dart';
+import 'package:agora_chat/all_conversations/models/conversation_model.dart';
 import 'package:agora_chat_sdk/agora_chat_sdk.dart';
 import 'package:flutter/material.dart';
 
@@ -13,9 +13,9 @@ class AllConversationViewModel extends ChangeNotifier {
   // List<ChatConversation> _conversations = [];
   // List<ChatConversation> get conversations => _conversations;
 
-  List<Conversation> _conversations = [];
-  List<Conversation> get conversations => _conversations;
-  set conversations(List<Conversation> newConversations) {
+  List<ConversationModel> _conversations = [];
+  List<ConversationModel> get conversations => _conversations;
+  set conversations(List<ConversationModel> newConversations) {
     _conversations = newConversations;
     notifyListeners();
   }
@@ -29,7 +29,7 @@ class AllConversationViewModel extends ChangeNotifier {
       for (var conv in agoraConv) {
         final unreadCount = await conv.unreadCount();
         final lastMessage = await conv.latestMessage();
-        final conversation = Conversation(
+        final conversation = ConversationModel(
           username: lastMessage!.from!,
           userDp: '',
           unreadMessageCount: unreadCount,
